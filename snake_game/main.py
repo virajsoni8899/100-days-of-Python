@@ -5,6 +5,13 @@ from food import Food
 from scoreboard import Scoreboard
 
 
+FONT = ("Courier", 24, "normal")
+ALIGNMENT = "center"
+TOP_OF_SCREEN = 270
+BOTTOM_OF_SCREEN = -270
+LEFT_OF_SCREEN = -280
+RIGHT_OF_SCREEN = 280
+
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
@@ -36,17 +43,15 @@ while game_is_on:
         scoreboard.increase_score()
     # detect collision with wall
     if snake.head.xcor()>280 or snake.head.xcor()<-280 or snake.head.ycor()>280 or snake.head.ycor()<-280:
-        scoreboard.game_over()
-        game_is_on = False
+        scoreboard.reset()
+        snake.reset()
+
     # detect collision with tail
     for segment in snake.segments[1:]:
         if snake.head.distance(segment)<10:
-            scoreboard.game_over()
-            game_is_on = False
-    # detect collision with tail
-
-
-
+            scoreboard.reset()
+            snake.reset()
+            
 
 
 
